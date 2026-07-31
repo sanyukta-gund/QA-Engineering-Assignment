@@ -1,14 +1,46 @@
-# QA Engineering Take-Home Assignment
+# QA Engineering Assignment
 
 ## Overview
 
-This repository contains the solutions for the QA Engineering Take-Home Assignment. The project includes automation frameworks for both Web and Mobile applications developed using industry-standard tools and best practices.
+This repository contains my submission for the QA Engineering Take-Home Assignment. The solution includes:
 
-The frameworks are designed using the **Page Object Model (POM)** to ensure maintainability, scalability, and code reusability.
+- Web UI Automation using Selenium WebDriver
+- Mobile App Automation using Appium
+- Page Object Model (POM) framework
+- TestNG for test execution
+- Maven for dependency management
 
 ---
 
-## Technology Stack
+# Project Structure
+
+```
+QA-Engineering-Assignment
+│
+├── Web-Automation
+│   ├── src/test/java
+│   │   ├── base
+│   │   ├── pages
+│   │   ├── tests
+│   │   └── utils
+│   ├── pom.xml
+│   └── testng.xml
+│
+├── MobileAutomation
+│   ├── src/test/java
+│   │   ├── base
+│   │   ├── pages
+│   │   ├── tests
+│   │   └── utils
+│   ├── pom.xml
+│   └── testng.xml
+│
+└── README.md
+```
+
+---
+
+# Technology Stack
 
 ### Web Automation
 
@@ -26,49 +58,69 @@ The frameworks are designed using the **Page Object Model (POM)** to ensure main
 - TestNG
 - Maven
 - Android Emulator
-- Page Object Model (POM)
 
 ---
 
-## Project Structure
+# Prerequisites
 
-```
-QA-Engineering-Assignment
-│
-├── Web-automation
-│   ├── src
-│   ├── pom.xml
-│   └── testng.xml
-│
-├── MobileAutomation
-│   ├── src
-│   ├── pom.xml
-│   └── testng.xml
-│
-└── README.md
-```
+Install the following before running the project:
 
----
-
-## Prerequisites
-
-Install the following software before executing the tests:
-
-- Java JDK 21+
-- Maven 3.9+
+- Java JDK 21 or above
+- Maven
 - Eclipse IDE
+- Google Chrome
+- ChromeDriver (managed automatically by Selenium Manager)
+- Node.js
+- Appium Server (v3+)
 - Android Studio
 - Android SDK
 - Android Emulator
-- Node.js
-- Appium Server 3.x
-- Appium Inspector (Optional)
 
 ---
 
-## Web Automation Execution
+# Web Automation
 
-Navigate to the Web Automation project.
+### Application
+
+https://www.saucedemo.com
+
+### Test Cases Implemented
+
+### Test Case A (Success Path)
+
+- Login with **standard_user**
+- Verify the user is redirected to the Inventory/Catalog page.
+
+### Test Case B (Failure Path)
+
+- Login with **locked_out_user**
+- Verify the error message:
+
+```
+Epic sadface: Sorry, this user has been locked out.
+```
+
+---
+
+# Mobile Automation
+
+### Application
+
+Sauce Labs MyDemoApp Android APK
+
+### Automated Scenario
+
+- Launch application
+- Open menu
+- Navigate to Login
+- Login with valid credentials
+- Verify Product page is displayed
+
+---
+
+# How to Execute Web Automation
+
+Open terminal inside **Web-Automation**
 
 Run:
 
@@ -76,21 +128,37 @@ Run:
 mvn clean test
 ```
 
-Or execute the TestNG suite directly from Eclipse.
+or
+
+```bash
+mvn test
+```
+
+You can also execute using:
+
+```bash
+testng.xml
+```
+
+Run As → TestNG Suite
 
 ---
 
-## Mobile Automation Execution
+# How to Execute Mobile Automation
 
-### Start the Android Emulator
-
-### Start the Appium Server
+## Start Appium Server
 
 ```bash
 appium
 ```
 
-Navigate to the Mobile Automation project.
+Verify emulator is connected
+
+```bash
+adb devices
+```
+
+Open terminal inside **MobileAutomation**
 
 Run:
 
@@ -98,42 +166,38 @@ Run:
 mvn clean test
 ```
 
-Or execute the TestNG suite directly from Eclipse.
+or execute
+
+```bash
+testng.xml
+```
+
+using TestNG.
 
 ---
 
-## Framework Features
+# Framework Design
 
-- Page Object Model (POM)
-- Explicit Waits
+The framework follows the Page Object Model (POM) design pattern.
+
+Features:
+
+- Reusable Page Objects
+- Base Page implementation
 - Driver Factory
-- Base Test
-- Utility Classes
-- Reusable Methods
+- Explicit Wait utilities
 - TestNG Framework
-- Maven Dependency Management
+- Clean and maintainable code structure
 
 ---
 
-## Automated Test Scenarios
-
-### Web Automation
-
-- User Login
-- Product Validation
-- Add Product to Cart
-- Logout
-
-### Mobile Automation
-
-- User Login
-- Product Validation
-- Navigation Validation
-- Add Product to Cart
 
 
-## Author
+# Author
 
 **Sanyukta Gund**
 
 QA Engineer
+
+GitHub:
+https://github.com/sanyukta-gund
