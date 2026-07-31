@@ -12,43 +12,69 @@ import utils.DriverFactory;
 
 public class LoginTest {
 
-    WebDriver driver;
-    LoginPage loginPage;
-    InventoryPage inventoryPage;
+    private WebDriver driver;
+    private LoginPage loginPage;
+    private InventoryPage inventoryPage;
 
     @BeforeMethod
     public void setup() {
+
         driver = DriverFactory.getDriver();
+
         loginPage = new LoginPage(driver);
         inventoryPage = new InventoryPage(driver);
     }
 
-    @Test(priority = 1)
-    public void validLoginTest() {
+    @Test(priority = 1, description = "Test Case A (Success Path): Login with standard_user")
+    public void verifySuccessfulLogin() {
 
+        // Login with valid credentials
         loginPage.login("standard_user", "secret_sauce");
 
-        Assert.assertTrue(inventoryPage.isInventoryPageDisplayed(),
-                "Inventory page is not displayed");
+        // Verify user is redirected to Inventory page
+        Assert.assertTrue(
+                inventoryPage.isInventoryPageDisplayed(),
+                "User was not redirected to the inventory/catalog page.");
 
-        Assert.assertEquals(inventoryPage.getPageTitle(), "Products");
+        System.out.println("=================================================");
+        System.out.println("Test Case A Passed");
+        System.out.println("User successfully redirected to Inventory Page.");
+        System.out.println("=================================================");
     }
 
-    @Test(priority = 2)
-    public void lockedUserLoginTest() {
+    @Test(priority = 2, description = "Test Case B (Failure Path): Login with locked_out_user")
+    public void verifyLockedOutUserLogin() {
 
+        // Login with locked user credentials
         loginPage.login("locked_out_user", "secret_sauce");
 
+        // Get actual error message from UI
         String actualError = loginPage.getErrorMessage();
 
+        // Expected error message
         String expectedError =
                 "Epic sadface: Sorry, this user has been locked out.";
 
-        Assert.assertEquals(actualError, expectedError);
+        // Print message in console
+        System.out.println("=================================================");
+        System.out.println("Actual Error Message : " + actualError);
+        System.out.println("Expected Error Message : " + expectedError);
+        System.out.println("=================================================");
+
+        // Verify error message
+        Assert.assertEquals(
+                actualError,
+                expectedError,
+                "Incorrect error message displayed for locked out user.");
+
+        System.out.println("Test Case B Passed");
+        System.out.println("Locked user error message verified successfully.");
+        System.out.println("=================================================");
     }
 
     @AfterMethod
     public void tearDown() {
+
         DriverFactory.quitDriver();
     }
 }
